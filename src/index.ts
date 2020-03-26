@@ -1,11 +1,8 @@
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 
 
-const obs$ = new Observable<string>( subs => {
-  subs.next('Hola');
-  subs.next('Mundo');
-  subs.complete();
-  subs.next('Javascript');
-});
-
-obs$.subscribe( console.log );
+const observer : Observer<any> = {
+  next: valor =>  console.log('siguiente: ', valor),
+  error: error => console.warn('error: ', error),
+  complete: () => console.info('Completado')
+};

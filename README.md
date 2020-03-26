@@ -48,10 +48,33 @@ const obs$ = new Observable<tipo-dato>( subscriber => {
   subscriber.complete();
 });
 
+// Formas para ejecutar el suscribe 1
+
 obs$.subscribe( resp => console.log(resp) );
 obs$.subscribe( console.log ); // con es6 se puede manejar así 
+
+// Formas para ejecutar el suscribe 2
+
+obs$.subscribe(
+  valor => console.log('next: ', valor),
+  error => console.warn('error', error),
+  () => console.info('Completado')
+);
+
+// Formas para ejecutar el suscribe 3, observe
+
+const observer : Observer<string> = {
+  next: valor =>  console.log('siguiente [next]: ', valor),
+  error: error => console.warn('error [obs]', error),
+  complete: () => console.info('Completado [obs]')
+};
+
+obs$.subscribe(observer);
 ~~~
 
 Tener en cuenta:
 - `subscriber.next` sirve para emitir un valor 
 -  `subscriber.complete`: Ninguna emisión después de complete sera notificada
+
+### Subscription y unsubscribe
+
