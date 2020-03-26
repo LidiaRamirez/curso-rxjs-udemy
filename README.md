@@ -25,3 +25,33 @@ Por defecto, el puerto que configuré para este proyecto es el ```8081```, pero 
 Simplemente cambian el puerto por el que ustedes necesiten y listo. (lógicamente graban los cambios antes de ejecutar el ```npm start``` nuevamente)
 
 
+## Observable 
+
+Como estándar se define un observable con `$` al final. Ej:
+
+~~~
+const obs$
+~~~
+
+Las formas de definir observable:
+
+~~~
+const observable$ = Observable.create(); // poco común 
+const observable$ = new Observable(); // lo normal
+~~~
+
+
+~~~
+
+const obs$ = new Observable<tipo-dato>( subscriber => {
+  subscriber.next('Hola');
+  subscriber.complete();
+});
+
+obs$.subscribe( resp => console.log(resp) );
+obs$.subscribe( console.log ); // con es6 se puede manejar así 
+~~~
+
+Tener en cuenta:
+- `subscriber.next` sirve para emitir un valor 
+-  `subscriber.complete`: Ninguna emisión después de complete sera notificada
